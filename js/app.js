@@ -1,32 +1,37 @@
-App = Ember.Application.create();
 
-App.Router.map(function() {
+if (typeof PC == "undefined" || !PC) {
+  var PC = {};
+}
+
+PC.BballLeague = Ember.Application.create();
+
+PC.BballLeague.Router.map(function() {
   this.route("home", { path: "/" });
   this.resource('team', { path: '/team/:team_id' });
 });
 
-App.Store = DS.Store.extend({
+PC.BballLeague.Store = DS.Store.extend({
   revision: 12,
   adapter: 'DS.FixtureAdapter'
 });
 
-App.Team = DS.Model.extend({
+PC.BballLeague.Team = DS.Model.extend({
   name: DS.attr('string'),
   colors: DS.attr('string')
 })
 
-App.HomeRoute = Ember.Route.extend({
+PC.BballLeague.HomeRoute = Ember.Route.extend({
   model: function(){
    return ['Coed', 'Saturdays from 9AM-3PM', 'at Park Center']
 
   },
   setupController: function(controller, model){
     controller.set('info', model)
-    controller.set('teams', App.Team.find());
+    controller.set('teams', PC.BballLeague.Team.find());
   }
 });
 
-App.Team.FIXTURES = [{
+PC.BballLeague.Team.FIXTURES = [{
   id: 1,
   name: 'Celtics',
   colors: 'Green, White'
