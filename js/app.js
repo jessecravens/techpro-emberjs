@@ -3,7 +3,9 @@ if (typeof PC == "undefined" || !PC) {
   var PC = {};
 }
 
-PC.BballLeague = Ember.Application.create();
+PC.BballLeague = Ember.Application.create({
+  LOG_TRANSITIONS: true
+});
 
 PC.BballLeague.Router.map(function() {
   this.route("home", { path: "/" });
